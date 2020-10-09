@@ -69,12 +69,23 @@ void	display(t_app *app)
 		1000, 300);
 }
 
-void	ft_screenshot()
+void	fait_des_trucs(t_app *app)
 {
-
+	if (app->control.mb)
+	{
+		if (app->control.mx > 0 && app->control.mx < (PIC_SIZE + 3) * MX \
+			&& app->control.my > 0 && app->control.my < (PIC_SIZE + 3) * MY
+		)
+		{
+			// printf("%dx%d\n", app->control.mx / (PIC_SIZE + 3), \
+			// app->control.my / (PIC_SIZE + 3));
+			app->map[app->control.my / (PIC_SIZE + 3)][app->control.mx / (PIC_SIZE + 3)] = app->brush;
+		}
+	}
 }
 
 int		default_idle(void *app)
 {
+	fait_des_trucs(app);
 	display(app);
 }
