@@ -16,7 +16,7 @@ void	zero(t_app *app)
 		i = 0;
 		while (i < MX)
 		{
-			app->map[j][i] = 0;
+			app->map[j][i] = 7;
 			i++;
 		}
 		j++;
@@ -45,4 +45,17 @@ void	aff(int map[MY][MX])
 		write(1, &c, 1);
 		j++;
 	}
+}
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	void *beg;
+
+	beg = b;
+	while (len--)
+	{
+		*((char *)b) = (unsigned char)c;
+		b++;
+	}
+	return (beg);
 }

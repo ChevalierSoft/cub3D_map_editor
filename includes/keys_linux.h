@@ -3,7 +3,7 @@
 # define KEYS_LINUX_H
 
 # define K_SPACE 32
-# define K_ETER 65293
+# define K_ENTER 65293
 # define K_TAB 65289
 # define K_ESC 65307
 # define K_BS 65288

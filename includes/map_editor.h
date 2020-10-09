@@ -16,6 +16,8 @@
 # define NBS 8
 # define PIC_SIZE 33
 
+# define SAVE_FILE_SIZE 40
+
 typedef struct		s_image
 {
 	void			*pt;
@@ -41,6 +43,9 @@ typedef struct		s_app
 	int				map[MY][MX];
 	int 			brush;
 	t_control		control;
+	int				state;
+	char			sfile[SAVE_FILE_SIZE];
+	int				pts;
 }					t_app;
 
 // default.c
@@ -57,6 +62,7 @@ void	app_init(t_app **app, int ww, int wh);
 // utils.c
 void	zero(t_app *app);
 void	aff(int map[MY][MX]);
+void	*ft_memset(void *b, int c, size_t len);
 
 // quit.c
 int		quit_window(void *app);

@@ -40,7 +40,10 @@ void	app_init(t_app **app, int ww, int wh)
 	(*app)->ww = ww;
 	(*app)->wh = wh;
 	(*app)->brush = 1;
+	(*app)->state = 1;
+	(*app)->pts = 0;
 	did_you_know_that_i_hate_25_l_by_function(*app);
 	zero(*app);
 	aff((*app)->map);
+	ft_memset((*app)->sfile, '\0', SAVE_FILE_SIZE);
 }
