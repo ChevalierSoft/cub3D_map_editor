@@ -15,9 +15,9 @@ static void	remove_window(t_app *app)
 	free(app);
 }
 
-int			quit_window(void *app)
+int			quit_window(void *app, char *s)
 {
+	print(s);
 	remove_window(app);
-	printf("quit\n");
 	exit(0);
 }

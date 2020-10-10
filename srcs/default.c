@@ -47,13 +47,14 @@ int		default_key_pressed(int key, void *app)
 int		default_key_released(int key, void *app)
 {
 	if (key == K_ESC)
-		quit_window(app);
+		quit_window(app, "");
 	if (key == K_ENTER)
 	{
 		if (!((t_app *)app)->state)
 			((t_app *)app)->state = 1;
 		else
 		{
+			ft_save_map(app);
 			((t_app *)app)->state = 0;
 			((t_app *)app)->pts = 0;
 			ft_memset(((t_app *)app)->sfile, '\0', SAVE_FILE_SIZE);
@@ -63,7 +64,7 @@ int		default_key_released(int key, void *app)
 	}
 	else if (((t_app *)app)->state == 1)
 	{
-		printf("%d\n", key);
+		((t_app *)app)->in = 1;
 		if (key == K_BS)
 		{
 			if (((t_app *)app)->pts > 0)
@@ -75,7 +76,7 @@ int		default_key_released(int key, void *app)
 		}
 		else
 		{
-			if (((t_app *)app)->pts < SAVE_FILE_SIZE)
+			if (((t_app *)app)->pts < SAVE_FILE_SIZE - 5)
 			{
 				((t_app *)app)->sfile[((t_app *)app)->pts] = key;
 				((t_app *)app)->pts++;
@@ -90,10 +91,10 @@ void	display(t_app *app)
 	int j;
 
 	j = 0;
-	while (j < MY)
+	while (j < app->sy)
 	{
 		i = 0;
-		while (i < MX)
+		while (i < app->sx)
 		{
 			mlx_put_image_to_window(app->mlx, app->win, \
 				app->pic[app->map[j][i]].pt, i * (PIC_SIZE + 3), \
@@ -105,8 +106,16 @@ void	display(t_app *app)
 	mlx_put_image_to_window(app->mlx, app->win, app->pic[app->brush].pt, \
 		1000, 300);
 	if (app->state)
+	{
+		if (app->in == 1)
+		{
+			mlx_clear_window(app->mlx, app->win);
+			app->in = 0;
+		}
 		mlx_string_put(app->mlx, app->win,  900, 350, 0xffccff, "file name : ");
-	mlx_string_put(app->mlx, app->win,  980, 350, 0xffccff, app->sfile);
+		mlx_string_put(app->mlx, app->win,  980, 350, 0xffccff, app->sfile);
+		mlx_string_put(app->mlx, app->win,  980 + 6 * app->pts + 1, 350, 0xffffff, ".cub");
+	}
 }
 
 void	fait_des_trucs(t_app *app)
@@ -115,8 +124,10 @@ void	fait_des_trucs(t_app *app)
 	{
 		if (app->control.mb)
 		{
-			if (app->control.mx > 0 && app->control.mx < (PIC_SIZE + 3) * MX \
-				&& app->control.my > 0 && app->control.my < (PIC_SIZE + 3) * MY
+			if (app->control.mx > 0 \
+				&& app->control.mx < (PIC_SIZE + 3) * app->sx \
+				&& app->control.my > 0
+				&& app->control.my < (PIC_SIZE + 3) * app->sy
 			)
 			{
 				// printf("%dx%d\n", app->control.mx / (PIC_SIZE + 3), \

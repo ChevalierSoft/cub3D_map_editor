@@ -8,6 +8,7 @@ app_init.c \
 quit.c \
 default.c \
 utils.c \
+ft_save_map.c \
 )
 
 OBJS	= ${SRCS:.c=.o}
