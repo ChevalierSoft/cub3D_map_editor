@@ -1,19 +1,12 @@
 #include "../includes/map_editor.h"
 
-static void	wrong_size(t_app *app)
-{
-	print(RED "Error\n./map_editor [size] or [sizeX] [sizeY]\n" RST);
-	print(RED "             [size] must be between [0 - 24]\n" RST);
-	quit_window(app, "");
-}
-
 static void	set_map_size(t_app *app, int argc, char **argv)
 {
 	int ix;
 	int iy;
 
 	if (argc < 2)
-		wrong_size(app);
+		app->q = 1;
 	else if (argc == 2)
 	{
 		if ((ix = ft_atoi(argv[1])) > 0 && ix <= MX)
@@ -22,7 +15,7 @@ static void	set_map_size(t_app *app, int argc, char **argv)
 			app->sy = ix;
 		}
 		else
-			wrong_size(app);
+			app->q = 1;
 	}
 	else
 		if ((ix = ft_atoi(argv[1])) > 0 && (iy = ft_atoi(argv[2])) > 0
@@ -32,14 +25,17 @@ static void	set_map_size(t_app *app, int argc, char **argv)
 			app->sy = iy;
 		}
 		else
-			wrong_size(app);
+			app->q = 1;
 }
 
 static void	did_you_know_that_i_hate_it_more_each_time(t_app *app)
 {
 	app->in = 0 ;
-	ft_memset((app)->sfile, '\0', SAVE_FILE_SIZE);
 	app->ffs = 1;
+	(app)->control.mb = 0;
+	(app)->control.mx = 0;
+	(app)->control.my = 0;
+	zero(app);
 }
 
 static void	did_you_know_that_i_hate_25_l_by_function(t_app *app)
@@ -47,10 +43,6 @@ static void	did_you_know_that_i_hate_25_l_by_function(t_app *app)
 	int		size;
 	int		size_y;
 
-	size = WW;
-	size_y = WH;
-	app->background.pt = mlx_xpm_file_to_image(app->mlx, \
-		"pics/background.xpm", &size, &size_y);
 	size = PIC_SIZE;
 	app->pic[0].pt = mlx_xpm_file_to_image(app->mlx, \
 		"pics/ca0.xpm", &size, &size);
@@ -68,6 +60,10 @@ static void	did_you_know_that_i_hate_25_l_by_function(t_app *app)
 		"pics/ca6.xpm", &size, &size);
 	app->pic[7].pt = mlx_xpm_file_to_image(app->mlx, \
 		"pics/ca7.xpm", &size, &size);
+	size = WW;
+	size_y = WH;
+	app->background.pt = mlx_xpm_file_to_image(app->mlx, \
+		"pics/background.xpm", &size, &size_y);
 	did_you_know_that_i_hate_it_more_each_time(app);
 }
 
@@ -92,10 +88,8 @@ void		app_init(t_app **app, int argc, char **argv)
 	(*app)->brush = 1;
 	(*app)->state = 0;
 	(*app)->pts = 0;
-	(*app)->control.mb = 0;
-	(*app)->control.mx = 0;
-	(*app)->control.my = 0;
+	(*app)->q = 0;
+	ft_memset((*app)->sfile, '\0', SAVE_FILE_SIZE);
 	did_you_know_that_i_hate_25_l_by_function(*app);
-	zero(*app);
 	set_map_size(*app, argc, argv);
 }

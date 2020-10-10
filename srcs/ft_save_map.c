@@ -60,4 +60,5 @@ void		ft_save_map(t_app *app)
 		j++;
 		write(fd, "\n", 1);
 	}
+	close(fd);
 }

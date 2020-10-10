@@ -55,6 +55,7 @@ typedef struct		s_app
 	int				pts;
 	int				in;
 	int				ffs;
+	int				q;
 }					t_app;
 
 // app_init.c
@@ -81,5 +82,6 @@ void	zero(t_app *app);
 
 // quit.c
 int		quit_window(void *app, char *s);
+void	wrong_size(t_app *app);
 
 #endif

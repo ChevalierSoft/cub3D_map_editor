@@ -143,6 +143,8 @@ void	fait_des_trucs(t_app *app)
 
 int		default_idle(void *app)
 {
+	if (((t_app *)app)->q)
+		wrong_size(app);
 	fait_des_trucs(app);
 	display(app);
 }
