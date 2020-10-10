@@ -35,11 +35,22 @@ static void	set_map_size(t_app *app, int argc, char **argv)
 			wrong_size(app);
 }
 
+static void	did_you_know_that_i_hate_it_more_each_time(t_app *app)
+{
+	app->in = 0 ;
+	ft_memset((app)->sfile, '\0', SAVE_FILE_SIZE);
+	app->ffs = 1;
+}
+
 static void	did_you_know_that_i_hate_25_l_by_function(t_app *app)
 {
 	int		size;
+	int		size_y;
 
-	ft_memset((app)->sfile, '\0', SAVE_FILE_SIZE);
+	size = WW;
+	size_y = WH;
+	app->background.pt = mlx_xpm_file_to_image(app->mlx, \
+		"pics/background.xpm", &size, &size_y);
 	size = PIC_SIZE;
 	app->pic[0].pt = mlx_xpm_file_to_image(app->mlx, \
 		"pics/ca0.xpm", &size, &size);
@@ -57,7 +68,7 @@ static void	did_you_know_that_i_hate_25_l_by_function(t_app *app)
 		"pics/ca6.xpm", &size, &size);
 	app->pic[7].pt = mlx_xpm_file_to_image(app->mlx, \
 		"pics/ca7.xpm", &size, &size);
-	app->in = 0 ;
+	did_you_know_that_i_hate_it_more_each_time(app);
 }
 
 void		app_init(t_app **app, int argc, char **argv)
@@ -79,7 +90,7 @@ void		app_init(t_app **app, int argc, char **argv)
 	(*app)->sx = MX;
 	(*app)->sy = MY;
 	(*app)->brush = 1;
-	(*app)->state = 1;
+	(*app)->state = 0;
 	(*app)->pts = 0;
 	(*app)->control.mb = 0;
 	(*app)->control.mx = 0;
@@ -87,5 +98,4 @@ void		app_init(t_app **app, int argc, char **argv)
 	did_you_know_that_i_hate_25_l_by_function(*app);
 	zero(*app);
 	set_map_size(*app, argc, argv);
-	printf("sx sy (%d, %d)\n", (*app)->sx, (*app)->sy);
 }

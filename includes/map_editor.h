@@ -15,6 +15,10 @@
 # define MY 24
 # define WW 1400
 # define WH 900
+# define BPX 1148
+# define BPY 145
+# define SPX 937
+# define SPY 827
 # define NBS 8
 # define PIC_SIZE 33
 
@@ -42,7 +46,7 @@ typedef struct		s_app
 	void			*mlx;
 	void			*win;
 	t_image			pic[NBS];
-	// t_image			rin;
+	t_image			background;
 	int				map[MY][MX];
 	int 			brush;
 	t_control		control;
@@ -50,6 +54,7 @@ typedef struct		s_app
 	char			sfile[SAVE_FILE_SIZE];
 	int				pts;
 	int				in;
+	int				ffs;
 }					t_app;
 
 // app_init.c

@@ -21,7 +21,7 @@ static void	set_save_map_file(t_app *app, int *fd)
 	}
 }
 
-static char	bring_maki_to_svf_plz(char c)
+static char	nerf_akuma_plz(char c)
 {
 	if (c >= 0 && c <= 2)
 		return (c + '0');
@@ -53,7 +53,7 @@ void		ft_save_map(t_app *app)
 		i = 0;
 		while (i < app->sx)
 		{
-			c[0] = bring_maki_to_svf_plz((char)app->map[j][i]);
+			c[0] = nerf_akuma_plz((char)app->map[j][i]);
 			write(fd, &c, 1);
 			i++;
 		}

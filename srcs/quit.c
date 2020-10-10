@@ -10,6 +10,7 @@ static void	remove_window(t_app *app)
 		mlx_destroy_image(app->mlx, app->pic[i].pt);
 		i++;
 	}
+	mlx_destroy_image(app->mlx, app->background.pt);
 	mlx_clear_window(app->mlx, app->win);
 	mlx_destroy_window(app->mlx, app->win);
 	free(app);
