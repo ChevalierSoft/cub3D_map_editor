@@ -1,5 +1,12 @@
 #include "../includes/map_editor.h"
 
+#ifdef LINUX
+	#define azerty_to_qwerty azerty_to_qwerty_linux
+#endif
+#ifdef OSX
+	#define azerty_to_qwerty azerty_to_qwerty_linux
+#endif
+
 int		default_mouse_released(int mb, int x, int y, void *app)
 {
 	((t_app *)app)->control.mb = 0;
@@ -10,6 +17,8 @@ int		default_mouse_released(int mb, int x, int y, void *app)
 
 int		default_mouse_pressed(int mb, int x, int y, void *app)
 {
+	(void)x;
+	(void)y;
 	((t_app *)app)->control.mb = mb;
 	return (mb);
 }
@@ -19,10 +28,12 @@ int		default_mouse_position(int x, int y, void *app)
 	((t_app *)app)->control.mx = x;
 	((t_app *)app)->control.my = y;
 	// printf("mouse position %d, %d\n", x, y);
+	return (0);
 }
 
 int		default_key_pressed(int key, void *app)
 {
+	printf("key pressed : %d : %c\n", key, key);
 	if (!((t_app *)app)->state)
 	{
 		if (key == K_Q)
@@ -42,6 +53,32 @@ int		default_key_pressed(int key, void *app)
 		else if (key == K_SPACE)
 			((t_app *)app)->brush = 7;
 	}
+	return (0);
+}
+
+void 	writint_file_name(void *app, int key)
+{
+	((t_app *)app)->in = 1;
+	if (key == K_BS)
+	{
+		if (((t_app *)app)->pts > 0)
+		{
+			((t_app *)app)->pts--;
+			((t_app *)app)->sfile[((t_app *)app)->pts] = '\0';
+			mlx_put_image_to_window(((t_app *)app)->mlx, \
+				((t_app *)app)->win, ((t_app *)app)->background.pt, 0, 0);
+		}
+	}
+	else
+	{
+		if (((t_app *)app)->pts < SAVE_FILE_SIZE - 5)
+		{
+			if ((key = azerty_to_qwerty_linux(key)) < 0)
+				return ;
+			((t_app *)app)->sfile[((t_app *)app)->pts] = key;
+			((t_app *)app)->pts++;
+		}
+	}
 }
 
 int		default_key_released(int key, void *app)
@@ -56,7 +93,7 @@ int		default_key_released(int key, void *app)
 			((t_app *)app)->state = 1;
 		else
 		{
-			ft_save_map(app);
+			save_map(app);
 			((t_app *)app)->state = 0;
 			((t_app *)app)->pts = 0;
 			ft_memset(((t_app *)app)->sfile, '\0', SAVE_FILE_SIZE);
@@ -66,27 +103,8 @@ int		default_key_released(int key, void *app)
 		printf("state : %d\n", ((t_app *)app)->state);
 	}
 	else if (((t_app *)app)->state == 1)
-	{
-		((t_app *)app)->in = 1;
-		if (key == K_BS)
-		{
-			if (((t_app *)app)->pts > 0)
-			{
-				((t_app *)app)->pts--;
-				((t_app *)app)->sfile[((t_app *)app)->pts] = '\0';
-				mlx_put_image_to_window(((t_app *)app)->mlx, \
-					((t_app *)app)->win, ((t_app *)app)->background.pt, 0, 0);
-			}
-		}
-		else
-		{
-			if (((t_app *)app)->pts < SAVE_FILE_SIZE - 5)
-			{
-				((t_app *)app)->sfile[((t_app *)app)->pts] = key;
-				((t_app *)app)->pts++;
-			}
-		}
-	}
+		writint_file_name(app, key);
+	return (0);
 }
 
 void	display(t_app *app)
@@ -147,4 +165,6 @@ int		default_idle(void *app)
 		wrong_size(app);
 	fait_des_trucs(app);
 	display(app);
+
+	return (0);
 }

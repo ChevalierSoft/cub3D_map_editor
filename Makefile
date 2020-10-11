@@ -1,6 +1,13 @@
 NAME	= map_editor
 FLAGS	= -Wextra -Wall -Werror
 LIB		= -lmlx -lXext -lX11
+INC		= ./includes/map_editor.h
+
+ifeq ($(UNAME_S),Darwin)
+    OS = -D OSX
+else
+	OS = -D LINUX
+endif
 
 SRCS	= $(addprefix srcs/,\
 main.c \
@@ -8,15 +15,19 @@ app_init.c \
 quit.c \
 default.c \
 utils.c \
-ft_save_map.c \
+save_map.c \
+azerty_to_qwerty_linux.c \
 )
 
-OBJS	= ${SRCS:.c=.o}
+OBJS	= $(SRCS:.c=.o)
 
 all : $(NAME)
 
 $(NAME) : $(OBJS)
 	gcc -O3 -o $(NAME) $(OBJS) $(FLAGS) -L. $(LIB)
+
+%.o : %.c
+	gcc -O3 -o $(NAME) $(FLAGS) -c -o $@ $< -I.${INC} -L. $(LIB) $(OS)
 
 lib_mlx :
 	@echo "compiling  minilibx \c"

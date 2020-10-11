@@ -61,6 +61,9 @@ typedef struct		s_app
 // app_init.c
 void		app_init(t_app **app, int argc, char **argv);
 
+// azerty_to_qwerty_linux.c
+int		azerty_to_qwerty_linux(int key);
+
 // default.c
 void	help();
 int		default_idle(void *app);
@@ -71,7 +74,7 @@ int		default_mouse_pressed(int mb, int x, int y, void *app);
 int		default_mouse_position(int x, int y, void *g);
 
 // ft_save_map.c
-void	ft_save_map(t_app *app);
+void	save_map(t_app *app);
 
 // utils.c
 void	aff(t_app *app);

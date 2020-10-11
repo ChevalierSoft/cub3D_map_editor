@@ -36,7 +36,7 @@ static char	nerf_akuma_plz(char c)
 	return (' ');
 }
 
-void		ft_save_map(t_app *app)
+void		save_map(t_app *app)
 {
 	int		i;
 	int		j;
