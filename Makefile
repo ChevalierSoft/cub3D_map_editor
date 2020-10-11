@@ -17,6 +17,8 @@ default.c \
 utils.c \
 save_map.c \
 azerty_to_qwerty_linux.c \
+display.c \
+default_mouse.c \
 )
 
 OBJS	= $(SRCS:.c=.o)

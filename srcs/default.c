@@ -7,33 +7,9 @@
 	#define azerty_to_qwerty azerty_to_qwerty_linux
 #endif
 
-int		default_mouse_released(int mb, int x, int y, void *app)
-{
-	((t_app *)app)->control.mb = 0;
-	if (x > BPX && x < BPX + PIC_SIZE && y > BPY && y < BPY + PIC_SIZE)
-		((t_app *)app)->brush = (((t_app *)app)->brush + 1) % NBS;
-	return (mb);
-}
-
-int		default_mouse_pressed(int mb, int x, int y, void *app)
-{
-	(void)x;
-	(void)y;
-	((t_app *)app)->control.mb = mb;
-	return (mb);
-}
-
-int		default_mouse_position(int x, int y, void *app)
-{
-	((t_app *)app)->control.mx = x;
-	((t_app *)app)->control.my = y;
-	// printf("mouse position %d, %d\n", x, y);
-	return (0);
-}
-
 int		default_key_pressed(int key, void *app)
 {
-	printf("key pressed : %d : %c\n", key, key);
+	// printf("key pressed : %d : %c\n", key, key);
 	if (!((t_app *)app)->state)
 	{
 		if (key == K_Q)
@@ -100,44 +76,11 @@ int		default_key_released(int key, void *app)
 			mlx_put_image_to_window(((t_app *)app)->mlx, \
 				((t_app *)app)->win, ((t_app *)app)->background.pt, 0, 0);
 		}
-		printf("state : %d\n", ((t_app *)app)->state);
+		// printf("state : %d\n", ((t_app *)app)->state);
 	}
 	else if (((t_app *)app)->state == 1)
 		writint_file_name(app, key);
 	return (0);
-}
-
-void	display(t_app *app)
-{
-	int i;
-	int j;
-
-	j = 0;
-	while (j < app->sy)
-	{
-		i = 0;
-		while (i < app->sx)
-		{
-			mlx_put_image_to_window(app->mlx, app->win, \
-				app->pic[app->map[j][i]].pt, i * (PIC_SIZE + 3), \
-				j * (PIC_SIZE + 3));
-			i++;
-		}
-		j++;
-	}
-	mlx_put_image_to_window(app->mlx, app->win, app->pic[app->brush].pt, \
-		BPX, BPY);
-	if (app->state)
-	{
-		if (app->in == 1)
-		{
-			mlx_put_image_to_window(app->mlx, app->win, app->background.pt, 0, 0);
-			app->in = 0;
-		}
-		mlx_string_put(app->mlx, app->win,  SPX, SPY, 0xffccff, "file name : ");
-		mlx_string_put(app->mlx, app->win,  SPX + 78, SPY, 0xffccff, app->sfile);
-		mlx_string_put(app->mlx, app->win,  SPX + 78 + 6 * app->pts + 1, SPY, 0xffffff, ".cub");
-	}
 }
 
 void	fait_des_trucs(t_app *app)

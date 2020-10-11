@@ -73,6 +73,14 @@ int		default_mouse_released(int mb, int x, int y, void *app);
 int		default_mouse_pressed(int mb, int x, int y, void *app);
 int		default_mouse_position(int x, int y, void *g);
 
+// default_mouse.c
+int		default_mouse_released(int mb, int x, int y, void *app);
+int		default_mouse_pressed(int mb, int x, int y, void *app);
+int		default_mouse_position(int x, int y, void *app);
+
+// display.c
+void	display(t_app *app);
+
 // ft_save_map.c
 void	save_map(t_app *app);
 
