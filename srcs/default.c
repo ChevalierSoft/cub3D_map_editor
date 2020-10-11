@@ -59,6 +59,7 @@ void 	writint_file_name(void *app, int key)
 
 int		default_key_released(int key, void *app)
 {
+	printf("key : %d %c\n", key, key);
 	if (key == K_ESC)
 		quit_window(app, "");
 	if (key == K_ENTER)

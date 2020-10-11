@@ -3,7 +3,11 @@
 # define MAP_EDITOR_H
 
 # include "../minilibx-linux/mlx.h"
-# include "keys_linux.h"
+# ifdef LINUX
+#  include "keys_linux.h"
+# else
+#  include "keys_osx.h"
+# endif
 # include "color.h"
 # include <unistd.h>
 # include <stdio.h>
