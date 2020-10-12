@@ -27,6 +27,9 @@
 # define K_ARROW_L 65361
 # define K_ARROW_R 65363
 
+# define K_COMMA 46
+# define K_PARENTESIS_R 41
+
 # define K_A 113
 # define K_B 98
 # define K_C 99

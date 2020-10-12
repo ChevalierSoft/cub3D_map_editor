@@ -72,18 +72,18 @@ static int	get_char_from_key_numpad(int key)
 int			get_key_linux_rebind(int key)
 {
 	if (key == K_A)
-		return ('q');
-	else if (key == K_Q)
 		return ('a');
+	else if (key == K_Q)
+		return ('q');
 	else if (key == K_Z)
-		return ('w');
-	else if (key == K_W)
 		return ('z');
-	else if (key == K_COMMA)
+	else if (key == K_W)
+		return ('w');
+	else if (key == K_M)
 		return ('m');
 	else if (key == K_PARENTESIS_R)
 		return ('_');
-	else if (key >= 'a' && key <= 'z')
+	if (key >= 'a' && key <= 'z')
 		return (key);
 	return (-1);
 }
