@@ -41,7 +41,7 @@ void	display_filename(t_app *app)
 		app->in = 0;
 	}
 	mlx_string_put(app->mlx, app->win, SPX, SPY, 0xffccff, "file name : ");
-	mlx_string_put(app->mlx, app->win, SPX + 78, SPY, 0xffccff, app->sfile);
+	mlx_string_put(app->mlx, app->win, SPX + 78, SPY, 0xffffff, app->sfile);
 	mlx_string_put(app->mlx, app->win, SPX + 78 + FONT_SIZE * app->pts + 1, \
 		SPY, 0xffffff, ".cub");
 }
