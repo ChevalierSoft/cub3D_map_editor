@@ -15,7 +15,6 @@
 static void	set_map_size(t_app *app, int argc, char **argv)
 {
 	int ix;
-	int iy;
 
 	if (argc < 2)
 		app->q = 1;

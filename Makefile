@@ -1,8 +1,10 @@
 NAME		= map_editor
-FLAGS		= -g #-Wextra -Wall -Werror
+FLAGS		= -g -Wextra -Wall -Werror
 LIB_LINUX	= -lmlx -lXext -lX11
 LIB_OSX_GPU	= libmlx.a -lmlx -framework OpenGL -framework AppKit -lz
 INC			= ./includes/map_editor.h
+GRN     	= \033[36m
+RST     	= \033[0m
 
 UNAME_S := $(shell uname -s)
 
@@ -34,10 +36,11 @@ OBJS		= $(SRCS:.c=.o)
 all : $(NAME)
 
 $(NAME) : make_lib $(OBJS)
-	gcc -O3 -o $(NAME) $(OBJS) $(FLAGS) -L. $(LIB)
+	@gcc -O3 -o $(NAME) $(OBJS) $(FLAGS) -L. $(LIB)
+	@echo "$(GRN)map_editor ready to use$(RST)"
 
 %.o : %.c
-	gcc -O3 -o $(NAME) $(FLAGS) -c -o $@ $< -I.${INC}  $(OS)
+	@gcc -O3 -o $(NAME) $(FLAGS) -c -o $@ $< -I.${INC}  $(OS)
 
 make_lib :
 	@if [ $(UNAME_S) = Darwin ]; then \
@@ -61,10 +64,10 @@ lib_mlx_osx :
 	@echo "\t\t done"
 
 clean :
-	/bin/rm -rf $(OBJS)
+	@/bin/rm -rf $(OBJS)
 
 fclean : clean
-	/bin/rm -rf $(NAME)
+	@/bin/rm -rf $(NAME)
 
 re : fclean all
 
