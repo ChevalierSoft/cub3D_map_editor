@@ -28,6 +28,12 @@
 
 # define SAVE_FILE_SIZE 30
 
+# ifdef LINUX
+#  define FONT_SIZE 6
+# else
+#  define FONT_SIZE 7
+# endif
+
 typedef struct		s_image
 {
 	void			*pt;
@@ -60,13 +66,17 @@ typedef struct		s_app
 	int				in;
 	int				ffs;
 	int				q;
+	int				update;
 }					t_app;
 
 // app_init.c
-void		app_init(t_app **app, int argc, char **argv);
+void	app_init(t_app **app, int argc, char **argv);
 
-// azerty_to_qwerty_linux.c
-int		azerty_to_qwerty_linux(int key);
+// azerty_to_qwerty.c
+int		get_char_from_key(int key);
+
+// azerty_to_qwerty_osx_rebind.c
+int		get_key_osx_rebind(int key);
 
 // default.c
 void	help();

@@ -35,6 +35,7 @@ static void	did_you_know_that_i_hate_it_more_each_time(t_app *app)
 	(app)->control.mb = 0;
 	(app)->control.mx = 0;
 	(app)->control.my = 0;
+	(app)->update = 1;
 	zero(app);
 }
 

@@ -22,9 +22,11 @@ quit.c \
 default.c \
 utils.c \
 save_map.c \
-azerty_to_qwerty_linux.c \
+get_char_from_key.c \
+get_char_from_key_osx_rebind.c \
 display.c \
 default_mouse.c \
+default_key.c \
 )
 
 OBJS		= $(SRCS:.c=.o)

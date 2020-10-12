@@ -1,6 +1,6 @@
 #include "../includes/map_editor.h"
 
-static int	azerty_to_qwerty_linux_topnum(int key)
+static int	get_char_from_key_topnum(int key)
 {
 	if (key == K_TOPNUM_0)
 		return ('0');
@@ -25,7 +25,7 @@ static int	azerty_to_qwerty_linux_topnum(int key)
 	return (-1);
 }
 
-static int	azerty_to_qwerty_linux_numpad(int key)
+static int	get_char_from_key_numpad(int key)
 {
 	if (key == K_NUMPAD_0)
 		return ('0');
@@ -50,24 +50,40 @@ static int	azerty_to_qwerty_linux_numpad(int key)
 	return (-1);
 }
 
-int			azerty_to_qwerty_linux(int key)
+int			get_key_rebind_linux(int key)
 {
-	if (key == 'a')
+	if (key == K_A)
 		return ('q');
-	else if (key == 'q')
+	else if (key == K_Q)
 		return ('a');
-	else if (key == 'z')
+	else if (key == K_Z)
 		return ('w');
-	else if (key == 'w')
+	else if (key == K_W)
 		return ('z');
-	else if (key == ',')
+	else if (key == K_COMMA)
 		return ('m');
-	else if (key == ')')
+	else if (key == K_PARENTESIS_R)
 		return ('_');
 	else if (key >= 'a' && key <= 'z')
 		return (key);
-	else if (key >= K_NUMPAD_7 && key <= K_NUMPAD_0)
-		return (azerty_to_qwerty_linux_numpad(key));
-	else
-		return (azerty_to_qwerty_linux_topnum(key));
+	return (-1);
+}
+
+int			get_char_from_key(int key)
+{
+	int low_parry;
+
+#ifdef LINUX
+	if ((low_parry = get_key_rebind_linux(key)) >= 0)
+		return (low_parry);
+#endif
+#ifdef OSX
+	if ((low_parry = get_key_osx_rebind(key)) >= 0)
+		return (low_parry);
+#endif
+	if (key >= K_NUMPAD_7 && key <= K_NUMPAD_0)
+		return (get_char_from_key_numpad(key));
+	else if (key == K_SPACE)
+		return (' ');
+	return (get_char_from_key_topnum(key));
 }
