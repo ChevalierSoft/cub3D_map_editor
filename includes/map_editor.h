@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_editor.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dait-atm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/12 14:07:49 by dait-atm          #+#    #+#             */
+/*   Updated: 2020/10/12 14:07:50 by dait-atm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MAP_EDITOR_H
 
 # define MAP_EDITOR_H
@@ -14,7 +26,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
-# define NAME "map_editor"
+# define NAME "chevaliersoft/map_editor"
 # define MX 24
 # define MY 24
 # define WW 1400
@@ -58,7 +70,7 @@ typedef struct		s_app
 	t_image			pic[NBS];
 	t_image			background;
 	int				map[MY][MX];
-	int 			brush;
+	int				brush;
 	t_control		control;
 	int				state;
 	char			sfile[SAVE_FILE_SIZE];
@@ -69,44 +81,35 @@ typedef struct		s_app
 	int				update;
 }					t_app;
 
-// app_init.c
-void	app_init(t_app **app, int argc, char **argv);
+void				app_init(t_app **app, int argc, char **argv);
 
-// azerty_to_qwerty.c
-int		get_char_from_key(int key);
+int					get_char_from_key(int key);
 
-// azerty_to_qwerty_osx_rebind.c
-int		get_key_osx_rebind(int key);
+int					get_key_osx_rebind(int key);
 
-// default.c
-void	help();
-int		default_idle(void *app);
-int		default_key_released(int key, void *app);
-int		default_key_pressed(int key, void *app);
-int		default_mouse_released(int mb, int x, int y, void *app);
-int		default_mouse_pressed(int mb, int x, int y, void *app);
-int		default_mouse_position(int x, int y, void *g);
+void				help();
+int					default_idle(void *app);
+int					default_key_released(int key, void *app);
+int					default_key_pressed(int key, void *app);
+int					default_mouse_released(int mb, int x, int y, void *app);
+int					default_mouse_pressed(int mb, int x, int y, void *app);
+int					default_mouse_position(int x, int y, void *g);
 
-// default_mouse.c
-int		default_mouse_released(int mb, int x, int y, void *app);
-int		default_mouse_pressed(int mb, int x, int y, void *app);
-int		default_mouse_position(int x, int y, void *app);
+int					default_mouse_released(int mb, int x, int y, void *app);
+int					default_mouse_pressed(int mb, int x, int y, void *app);
+int					default_mouse_position(int x, int y, void *app);
 
-// display.c
-void	display(t_app *app);
+void				display(t_app *app);
 
-// ft_save_map.c
-void	save_map(t_app *app);
+void				save_map(t_app *app);
 
-// utils.c
-void	aff(t_app *app);
-int		ft_atoi(const char *str);
-void	*ft_memset(void *b, int c, size_t len);
-void	print(char *s);
-void	zero(t_app *app);
+void				aff(t_app *app);
+int					ft_atoi(const char *str);
+void				*ft_memset(void *b, int c, size_t len);
+void				print(char *s);
+void				zero(t_app *app);
 
-// quit.c
-int		quit_window(void *app, char *s);
-void	wrong_size(t_app *app);
+int					quit_window(void *app, char *s);
+void				wrong_size(t_app *app);
 
 #endif
