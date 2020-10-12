@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   default_key.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dait-atm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/12 13:49:17 by dait-atm          #+#    #+#             */
+/*   Updated: 2020/10/12 13:49:19 by dait-atm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/map_editor.h"
 
 int		default_key_pressed(int key, void *app)
 {
-	// printf("key pressed : %d : %c\n", key, key);
 	((t_app *)app)->update = 1;
 	if (!((t_app *)app)->state)
 	{
@@ -26,7 +37,7 @@ int		default_key_pressed(int key, void *app)
 	return (0);
 }
 
-void 	writint_file_name(void *app, int key)
+void	writint_file_name(void *app, int key)
 {
 	((t_app *)app)->in = 1;
 	if (key == K_BS)
@@ -35,8 +46,6 @@ void 	writint_file_name(void *app, int key)
 		{
 			((t_app *)app)->pts--;
 			((t_app *)app)->sfile[((t_app *)app)->pts] = '\0';
-			// (((t_app *)app)->mlx, \
-				((t_app *)app)->win, ((t_app *)app)->background.pt, 0, 0);
 		}
 	}
 	else
@@ -54,7 +63,6 @@ void 	writint_file_name(void *app, int key)
 int		default_key_released(int key, void *app)
 {
 	((t_app *)app)->update = 1;
-	// printf("key : %d %c\n", key, key);
 	if (key == K_ESC)
 		quit_window(app, "");
 	if (key == K_ENTER)
@@ -70,10 +78,7 @@ int		default_key_released(int key, void *app)
 			((t_app *)app)->state = 0;
 			((t_app *)app)->pts = 0;
 			ft_memset(((t_app *)app)->sfile, '\0', SAVE_FILE_SIZE);
-			// (((t_app *)app)->mlx, \
-				((t_app *)app)->win, ((t_app *)app)->background.pt, 0, 0);
 		}
-		// printf("state : %d\n", ((t_app *)app)->state);
 	}
 	else if (((t_app *)app)->state == 1)
 		writint_file_name(app, key);

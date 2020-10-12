@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   app_init.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dait-atm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/12 13:48:44 by dait-atm          #+#    #+#             */
+/*   Updated: 2020/10/12 13:48:46 by dait-atm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/map_editor.h"
 
 static void	set_map_size(t_app *app, int argc, char **argv)
@@ -17,20 +29,19 @@ static void	set_map_size(t_app *app, int argc, char **argv)
 		else
 			app->q = 1;
 	}
+	else if (ft_atoi(argv[1]) > 0 && ft_atoi(argv[2]) > 0
+		&& ft_atoi(argv[1]) <= MX && ft_atoi(argv[2]) <= MY)
+	{
+		app->sx = ft_atoi(argv[1]);
+		app->sy = ft_atoi(argv[2]);
+	}
 	else
-		if ((ix = ft_atoi(argv[1])) > 0 && (iy = ft_atoi(argv[2])) > 0
-			&& ix <= MX && iy <= MY)
-		{
-			app->sx = ix;
-			app->sy = iy;
-		}
-		else
-			app->q = 1;
+		app->q = 1;
 }
 
 static void	did_you_know_that_i_hate_it_more_each_time(t_app *app)
 {
-	app->in = 0 ;
+	app->in = 0;
 	app->ffs = 1;
 	(app)->control.mb = 0;
 	(app)->control.mx = 0;

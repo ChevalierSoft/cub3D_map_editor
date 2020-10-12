@@ -1,4 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_char_from_key.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dait-atm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/12 13:49:38 by dait-atm          #+#    #+#             */
+/*   Updated: 2020/10/12 13:49:39 by dait-atm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/map_editor.h"
+
+#ifdef LINUX
+# define REBIND get_key_linux_rebind
+#endif
+#ifdef OSX
+# define REBIND get_key_osx_rebind
+#endif
 
 static int	get_char_from_key_topnum(int key)
 {
@@ -50,7 +69,7 @@ static int	get_char_from_key_numpad(int key)
 	return (-1);
 }
 
-int			get_key_rebind_linux(int key)
+int			get_key_linux_rebind(int key)
 {
 	if (key == K_A)
 		return ('q');
@@ -73,17 +92,11 @@ int			get_char_from_key(int key)
 {
 	int low_parry;
 
-#ifdef LINUX
-	if ((low_parry = get_key_rebind_linux(key)) >= 0)
+	if ((low_parry = REBIND(key)) >= 0)
 		return (low_parry);
-#endif
-#ifdef OSX
-	if ((low_parry = get_key_osx_rebind(key)) >= 0)
-		return (low_parry);
-#endif
 	if (key >= K_NUMPAD_7 && key <= K_NUMPAD_0)
 		return (get_char_from_key_numpad(key));
-	else if (key == K_SPACE)
+	if (key == K_SPACE)
 		return (' ');
 	return (get_char_from_key_topnum(key));
 }

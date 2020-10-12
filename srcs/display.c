@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dait-atm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/12 13:49:30 by dait-atm          #+#    #+#             */
+/*   Updated: 2020/10/12 13:49:31 by dait-atm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/map_editor.h"
 
 void	display_map(t_app *app)
@@ -28,9 +40,9 @@ void	display_filename(t_app *app)
 		display_map(app);
 		app->in = 0;
 	}
-	mlx_string_put(app->mlx, app->win,  SPX, SPY, 0xffccff, "file name : ");
-	mlx_string_put(app->mlx, app->win,  SPX + 78, SPY, 0xffccff, app->sfile);
-	mlx_string_put(app->mlx, app->win,  SPX + 78 + FONT_SIZE * app->pts + 1, \
+	mlx_string_put(app->mlx, app->win, SPX, SPY, 0xffccff, "file name : ");
+	mlx_string_put(app->mlx, app->win, SPX + 78, SPY, 0xffccff, app->sfile);
+	mlx_string_put(app->mlx, app->win, SPX + 78 + FONT_SIZE * app->pts + 1, \
 		SPY, 0xffffff, ".cub");
 }
 

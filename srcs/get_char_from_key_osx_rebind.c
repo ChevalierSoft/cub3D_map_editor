@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_char_from_key_osx_rebind.c                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dait-atm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/12 13:49:46 by dait-atm          #+#    #+#             */
+/*   Updated: 2020/10/12 13:49:53 by dait-atm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/map_editor.h"
 
 static int	get_key_osx_rebind_3(int key)
@@ -21,7 +33,7 @@ static int	get_key_osx_rebind_3(int key)
 	return (-1);
 }
 
-static int get_key_osx_rebind_2(int key)
+static int	get_key_osx_rebind_2(int key)
 {
 	if (key == K_C)
 		return ('c');

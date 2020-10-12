@@ -1,9 +1,16 @@
-#include "../includes/map_editor.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dait-atm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/12 13:50:16 by dait-atm          #+#    #+#             */
+/*   Updated: 2020/10/12 13:50:17 by dait-atm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	help()
-{
-	write(1, "help\n", 5);
-}
+#include "../includes/map_editor.h"
 
 size_t	ft_strlen(const char *str)
 {
@@ -38,13 +45,6 @@ void	zero(t_app *app)
 	}
 }
 
-int		ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
-
 int		ft_atoi(const char *str)
 {
 	int		neg;
@@ -62,32 +62,9 @@ int		ft_atoi(const char *str)
 	else if (*str == '+')
 		str++;
 	res = 0;
-	while (ft_isdigit(*str))
+	while (*str >= '0' && *str <= '9')
 		res = ((res * 10) + (*str++ - '0'));
 	return ((int)(neg * res));
-}
-
-void	aff(t_app *app)
-{
-	int 	i;
-	int 	j;
-	char 	c[1];
-
-	j = 0;
-	while (j < app->sy)
-	{
-		i = 0;
-		while (i < app->sx)
-		{
-			c[0] = app->map[j][i] + '0';
-			write(1, &c, 1);
-			// printf("%c,", 'c');
-			i++;
-		}
-		c[0] = '\n';
-		write(1, &c, 1);
-		j++;
-	}
 }
 
 void	*ft_memset(void *b, int c, size_t len)

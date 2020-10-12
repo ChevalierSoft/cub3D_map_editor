@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   default_mouse.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dait-atm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/12 13:49:23 by dait-atm          #+#    #+#             */
+/*   Updated: 2020/10/12 13:49:24 by dait-atm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/map_editor.h"
 
 int		default_mouse_released(int mb, int x, int y, void *app)
@@ -21,7 +33,6 @@ int		default_mouse_position(int x, int y, void *app)
 {
 	((t_app *)app)->control.mx = x;
 	((t_app *)app)->control.my = y;
-	// printf("mouse position %d, %d\n", x, y);
 	((t_app *)app)->update = 1;
 	return (0);
 }
