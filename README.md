@@ -1,5 +1,5 @@
-# cube3d_map_editor
-Graphical map editor for cube3d allowing you to paint and save .cub files.
+# cub3D_map_editor
+Graphical map editor for cub3D allowing you to paint and save .cub files.
 This editor is made with minilibx, so if you need to learn it, you can start by reading the code.
 It's a tool made for 42's project cube3D.
 
